@@ -5,6 +5,7 @@
 {%if books %}
 <table class="list-of-books">
     <tr>
+        <td>ID</td>
         <td>Tytuł</td>
         <td>Autor</td>
         <td>Data publikacji</td>
@@ -15,6 +16,7 @@
     </tr>
     {% for book in books %}
     <tr>
+        <td>{{book.id}}</td>
         <td>{{book.title}}</td>
         <td>{{book.author}}</td>
         <td>{{book.publication_date}}</td>
@@ -22,6 +24,7 @@
         <td>{{book.pages_count}}</td>
         <td>{{book.cover_url}}</td>
         <td>{{book.publication_language}}</td>
+        <td><a href="{% url 'create-edit' book.id %}">Edycja</a></td>
     </tr>
     {% endfor %}
 </table>

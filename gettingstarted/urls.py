@@ -18,6 +18,9 @@ urlpatterns = [
     path("", hello.views.index, name="index"),
     path("db/", hello.views.db, name="db"),
     path("admin/", admin.site.urls),
-    path("create_book/", hello.views.create_book, name="create_book"),
-    path("all_books/", hello.views.all_books, name="all_books"),
+    path("create-edit/", hello.views.create_edit, name="create-edit"),
+    path(
+        "create-edit/<str:book_id>", hello.views.create_edit, name="create-edit"
+    ),
+    path("all-books/", hello.views.all_books, name="all-books"),
 ]

@@ -9,7 +9,7 @@ class Greeting(models.Model):
 class BooksModel(models.Model):
     title = models.CharField("Tytuł", max_length=255)
     author = models.CharField("Autor", max_length=255)
-    publication_date = models.DateTimeField("Data publikacji")
+    publication_date = models.DateField("Data publikacji")
     isbn_number = models.IntegerField("Numer ISBN")
     pages_count = models.IntegerField("Liczba stron")
     cover_url = models.CharField("Link do okładki", max_length=255)

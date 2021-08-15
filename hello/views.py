@@ -27,15 +27,19 @@ def db(request):
     return render(request, "db.html", {"greetings": greetings})
 
 
-def create_book(request):
-    context = {}
-
-    form = BooksForm(request.POST or None)
+def create_edit(request, book_id=""):
+    context = {"book_id": book_id}
+    if book_id:
+        form = BooksForm()
+        single_book = BooksModel.objects.get(pk=book_id)
+        form = BooksForm(request.POST or None, instance=single_book)
+    else:
+        form = BooksForm(request.POST or None)
     if form.is_valid():
         form.save()
 
     context["form"] = form
-    return render(request, "create_book.html", context)
+    return render(request, "create-edit.html", context)
 
 
 def all_books(request):
@@ -44,4 +48,4 @@ def all_books(request):
     books = myFilter.qs
     context = {"books": books, "myFilter": myFilter}
 
-    return render(request, "all_books.html", context)
+    return render(request, "all-books.html", context)

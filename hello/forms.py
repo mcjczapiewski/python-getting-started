@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.widgets import DateInput
 from .models import BooksModel
 
 
@@ -15,3 +16,7 @@ class BooksForm(forms.ModelForm):
             "cover_url",
             "publication_language",
         ]
+
+        widgets = {
+            "publication_date": DateInput(attrs={"type": "date"}),
+        }
