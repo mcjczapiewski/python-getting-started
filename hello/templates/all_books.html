@@ -1,0 +1,28 @@
+<form method="get">
+    {{myFilter.form}}
+    <button type="submit">Szukaj</button>
+</form>
+{%if books %}
+<table class="list-of-books">
+    <tr>
+        <td>Tytuł</td>
+        <td>Autor</td>
+        <td>Data publikacji</td>
+        <td>Numer ISBN</td>
+        <td>Liczba stron</td>
+        <td>Link do okładki</td>
+        <td>Język publikacji</td>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.publication_date}}</td>
+        <td>{{book.isbn_number}}</td>
+        <td>{{book.pages_count}}</td>
+        <td>{{book.cover_url}}</td>
+        <td>{{book.publication_language}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
