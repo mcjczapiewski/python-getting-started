@@ -1,31 +1,107 @@
-<form method="get">
-    {{myFilter.form}}
-    <button type="submit">Szukaj</button>
-</form>
-{%if books %}
-<table class="list-of-books">
-    <tr>
-        <td>ID</td>
-        <td>Tytuł</td>
-        <td>Autor</td>
-        <td>Data publikacji</td>
-        <td>Numer ISBN</td>
-        <td>Liczba stron</td>
-        <td>Link do okładki</td>
-        <td>Język publikacji</td>
-    </tr>
-    {% for book in books %}
-    <tr>
-        <td>{{book.id}}</td>
-        <td>{{book.title}}</td>
-        <td>{{book.author}}</td>
-        <td>{{book.publication_date}}</td>
-        <td>{{book.isbn_number}}</td>
-        <td>{{book.pages_count}}</td>
-        <td>{{book.cover_url}}</td>
-        <td>{{book.publication_language}}</td>
-        <td><a href="{% url 'create-edit' book.id %}">Edycja</a></td>
-    </tr>
-    {% endfor %}
-</table>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            a {
+                color: black;
+                text-decoration: none;
+            }
+            .main-class {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                padding-bottom: 75px;
+            }
+            .search-form {
+                position: relative;
+                left: 50px;
+            }
+            .buttons {
+                position: relative;
+                top: 20px;
+                left: 50px;
+            }
+            .list-of-books {
+                position: relative;
+                top: 35px;
+                left: 50px;
+            }
+            .table-header {
+                font-weight: 700;
+            }
+            table {
+                border-collapse: collapse;
+            }
+            tr {
+                border: solid;
+                border-width: 1px 0;
+                border-color: rgba(0, 0, 0, 0.2);
+            }
+            td {
+                padding: 0 10px;
+                max-width: 250px;
+                word-wrap: break-word;
+            }
+            td.edit > a {
+                color: blue;
+            }
+            td.delete > a {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main-class">
+            {% load render_table from django_tables2 %}
+            <form class="search-form" method="get">
+                <h4>FILTRY:</h4>
+                {{myFilter.form}}
+                <button type="submit">Szukaj</button>
+                <button><a href="/">Wyczyść</a></button>
+            </form>
+            <div class="buttons">
+                <button><a href="/create-edit/">Dodaj książkę</a></button>
+                <button><a href="/bfg/">Importuj z Google</a></button>
+            </div>
+            {%if books %}
+            <table class="list-of-books">
+                <tr class="table-header">
+                    <td>ID</td>
+                    <td>Tytuł</td>
+                    <td>Autor</td>
+                    <td>Data publikacji</td>
+                    <td>Numer ISBN</td>
+                    <td>Liczba stron</td>
+                    <td>Link do okładki</td>
+                    <td>Język publikacji</td>
+                </tr>
+                {% for book in books %}
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.publication_date|default:"N/A"}}</td>
+                    <td>{{book.isbn_number|default:"N/A"}}</td>
+                    <td>{{book.pages_count|default:"N/A"}}</td>
+                    {% if book.cover_url %}
+                    <td><a href="{{book.cover_url}}">LINK</a></td>
+                    {%else%}
+                    <td>N/A</td>
+                    {%endif %}
+                    <td>{{book.publication_language|default:"N/A"}}</td>
+                    <td class="edit">
+                        <a href="{% url 'create-edit' book.id %}">Edycja</a>
+                    </td>
+                    <td class="delete">
+                        <a href="{% url 'delete-book' book.id %}">Usuń</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </body>
+</html>
