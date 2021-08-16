@@ -5,3 +5,5 @@ requests
 psycopg2-binary
 dj-database-url
 django-filter
+django-bootstrap4
+django-tables2
