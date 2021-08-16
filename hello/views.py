@@ -1,19 +1,9 @@
 import requests
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
 
 from .models import BooksModel
 from .forms import BooksForm, GBooksForm
 from .filters import BooksFilter
-
-
-# Create your views here.
-def index(request):
-
-    # return HttpResponse('Hello from Python!')
-    r = requests.get("http://httpbin.org/status/418")
-    print(r.text)
-    return HttpResponse("<pre>" + r.text + "</pre>")
 
 
 def create_edit(request, book_id=""):
@@ -91,7 +81,11 @@ def books_from_google(request):
                     book.save()
                 return redirect("all-books")
             else:
-                print("no such books")
+                message = "Taka książka nie istnieje :-("
+                return render(request, "error-view.html", {"text": message})
         else:
-            print("ups")
+            message = (
+                "Coś poszło nie tak z Twoim zapytaniem. Spróbuj ponownie..."
+            )
+            return render(request, "error-view.html", {"text": message})
     return render(request, "bfg.html", {"form": form})
