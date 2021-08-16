@@ -15,12 +15,16 @@ admin.autodiscover()
 # Learn more here: https://docs.djangoproject.com/en/2.1/topics/http/urls/
 
 urlpatterns = [
-    path("", hello.views.index, name="index"),
-    path("db/", hello.views.db, name="db"),
+    path("", hello.views.all_books, name="all-books"),
     path("admin/", admin.site.urls),
     path("create-edit/", hello.views.create_edit, name="create-edit"),
     path(
         "create-edit/<str:book_id>", hello.views.create_edit, name="create-edit"
     ),
-    path("all-books/", hello.views.all_books, name="all-books"),
+    path("bfg/", hello.views.books_from_google, name="bfg"),
+    path(
+        "delete-book/<str:book_id>",
+        hello.views.delete_book,
+        name="delete-book",
+    ),
 ]

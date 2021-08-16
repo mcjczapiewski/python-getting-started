@@ -1,5 +1,4 @@
 from django import forms
-from django.forms.widgets import DateInput
 from .models import BooksModel
 
 
@@ -17,6 +16,13 @@ class BooksForm(forms.ModelForm):
             "publication_language",
         ]
 
-        widgets = {
-            "publication_date": DateInput(attrs={"type": "date"}),
-        }
+
+class GBooksForm(forms.Form):
+    q = forms.CharField(label="Słowa klucze", max_length=100)
+    intitle = forms.CharField(
+        label="Tytuł zawiera", max_length=100, required=False
+    )
+    inauthor = forms.CharField(
+        label="Autor zawiera", max_length=100, required=False
+    )
+    isbn = forms.CharField(label="Numer ISBN", max_length=20, required=False)
