@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from .models import BooksModel
 from .forms import BooksForm, GBooksForm
 from .filters import BooksFilter
-from .tables import BooksTable
 
 
 # Create your views here.

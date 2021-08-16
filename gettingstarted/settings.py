@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "hello",
     "django_filters",
     "bootstrap4",
-    "django_tables2",
 ]
 
 
