@@ -48,15 +48,13 @@
                 <h4>FILTRY:</h4>
                 {{myFilter.form}}
                 <button type="submit" class="btn btn-primary">Szukaj</button>
-                <button class="btn btn-danger"><a href="/">Wyczyść</a></button>
+                <a class="btn btn-danger" href="/">Wyczyść</a>
             </form>
             <div class="buttons">
-                <button class="btn btn-primary">
-                    <a href="/create-edit/">Dodaj książkę</a>
-                </button>
-                <button class="btn btn-secondary">
-                    <a href="/bfg/">Importuj z Google</a>
-                </button>
+                <a class="btn btn-primary" href="/create-edit/"
+                    >Dodaj książkę</a
+                >
+                <a class="btn btn-secondary" href="/bfg/">Importuj z Google</a>
             </div>
             {%if books %}
             <div class="table-responsive-md">
