@@ -9,25 +9,13 @@
                 color: black;
                 text-decoration: none;
             }
-            .main-class {
-                position: absolute;
-                display: flex;
-                flex-direction: column;
-                padding-bottom: 75px;
-            }
-            .search-form {
-                position: relative;
-                left: 50px;
-            }
             .buttons {
                 position: relative;
                 top: 20px;
-                left: 50px;
             }
             .list-of-books {
                 position: relative;
                 top: 35px;
-                left: 50px;
             }
             .table-header {
                 font-weight: 700;
@@ -54,53 +42,65 @@
         </style>
     </head>
     <body>
-        <div class="main-class">
+        {% extends 'base.html' %} {% block content %}
+        <div class="all-books">
             <form class="search-form" method="get">
                 <h4>FILTRY:</h4>
                 {{myFilter.form}}
-                <button type="submit">Szukaj</button>
-                <button><a href="/">Wyczyść</a></button>
+                <button type="submit" class="btn btn-primary">Szukaj</button>
+                <button class="btn btn-danger"><a href="/">Wyczyść</a></button>
             </form>
             <div class="buttons">
-                <button><a href="/create-edit/">Dodaj książkę</a></button>
-                <button><a href="/bfg/">Importuj z Google</a></button>
+                <button class="btn btn-primary">
+                    <a href="/create-edit/">Dodaj książkę</a>
+                </button>
+                <button class="btn btn-secondary">
+                    <a href="/bfg/">Importuj z Google</a>
+                </button>
             </div>
             {%if books %}
-            <table class="list-of-books">
-                <tr class="table-header">
-                    <td>ID</td>
-                    <td>Tytuł</td>
-                    <td>Autor</td>
-                    <td>Data publikacji</td>
-                    <td>Numer ISBN</td>
-                    <td>Liczba stron</td>
-                    <td>Link do okładki</td>
-                    <td>Język publikacji</td>
-                </tr>
-                {% for book in books %}
-                <tr>
-                    <td>{{book.id}}</td>
-                    <td>{{book.title}}</td>
-                    <td>{{book.author}}</td>
-                    <td>{{book.publication_date|default:"N/A"}}</td>
-                    <td>{{book.isbn_number|default:"N/A"}}</td>
-                    <td>{{book.pages_count|default:"N/A"}}</td>
-                    {% if book.cover_url %}
-                    <td><a href="{{book.cover_url}}">LINK</a></td>
-                    {%else%}
-                    <td>N/A</td>
-                    {%endif %}
-                    <td>{{book.publication_language|default:"N/A"}}</td>
-                    <td class="edit">
-                        <a href="{% url 'create-edit' book.id %}">Edycja</a>
-                    </td>
-                    <td class="delete">
-                        <a href="{% url 'delete-book' book.id %}">Usuń</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
+            <div class="table-responsive-md">
+                <table class="list-of-books table table-striped">
+                    <thead>
+                        <tr class="table-header">
+                            <th>ID</th>
+                            <th>Tytuł</th>
+                            <th>Autor</th>
+                            <th>Data publikacji</th>
+                            <th>Numer ISBN</th>
+                            <th>Liczba stron</th>
+                            <th>Link do okładki</th>
+                            <th>Język publikacji</th>
+                        </tr>
+                    </thead>
+                    {% for book in books %}
+                    <tr>
+                        <th>{{book.id}}</th>
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.publication_date|default:"N/A"}}</td>
+                        <td>{{book.isbn_number|default:"N/A"}}</td>
+                        <td>{{book.pages_count|default:"N/A"}}</td>
+                        {% if book.cover_url %}
+                        <td><a href="{{book.cover_url}}">LINK</a></td>
+                        {%else%}
+                        <td>N/A</td>
+                        {%endif %}
+                        <td>{{book.publication_language|default:"N/A"}}</td>
+                        <td class="edit">
+                            <a href="{% url 'create-edit' book.id %}">Edycja</a>
+                        </td>
+                        <td class="delete">
+                            <a href="{% url 'delete-book' book.id %}">Usuń</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
             {% endif %}
         </div>
+        {% endblock %}
+        <!-- </body>
+        </html> -->
     </body>
 </html>

@@ -12,16 +12,31 @@
             type="text/javascript"
             src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"
         ></script>
-        <meta charset="UTF-8" />
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <title>Document</title>
         <style>
             body {
-                width: 100%;
+                width: 90%;
                 height: 100%;
+                margin: auto;
             }
-            form {
+            form.myform {
                 position: relative;
                 max-width: 500px;
                 display: flex;
@@ -31,13 +46,34 @@
                 top: 70px;
                 transform: translateX(-50%);
             }
+            .all-books {
+                margin: 0;
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .list-of-books {
+                max-width: 1700px;
+            }
             a {
                 color: black;
                 text-decoration: none;
             }
+            button > a:hover {
+                color: white;
+                text-decoration: none;
+            }
+            button > a:after {
+                color: white;
+                text-decoration: none;
+            }
+            button > a {
+                color: white;
+            }
         </style>
     </head>
     <body>
-        {% block content %}{% endblock content %}
+        {% block content %}{% endblock %}
     </body>
 </html>
